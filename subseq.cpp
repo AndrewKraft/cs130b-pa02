@@ -1,19 +1,27 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <map>
 
 using namespace std;
 
-vector<int> subseq(int begin, int end, const vector<int>& v) {
-	int size = end-begin;
-	if(size==0) return vector<int>(1, v[begin]);
-	else {
-		
-	}
-}
-
 void solve(vector<int>& sequence) {
-	cout << sequence.size();
-	for(auto i : sequence) {
+	map<int,int> values;
+	vector<int> finalSeq;
+	for(int i=0; i < sequence.size(); i++) {
+		values.insert(pair<int, int>(sequence[i], i));
+	}
+	for(auto i : values) {
+		vector<int> temp;
+		temp.push_back(i.first);
+		if(sequence.size()-i.second < finalSeq.size()) break;
+		for(int j = i.second+1; j < sequence.size(); j++) {
+			if(temp[temp.size()-1]<sequence[j]) temp.push_back(sequence[j]);
+		}
+		if(temp.size()>finalSeq.size()) finalSeq=temp;
+	}
+	cout << finalSeq.size();
+	for(auto i : finalSeq) {
 		cout << " " << i;
 	}
 	cout << endl;
