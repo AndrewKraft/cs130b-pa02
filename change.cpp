@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <map>
 
 using namespace std;
 
@@ -10,9 +9,25 @@ struct testcase {
 	vector<int> coins;
 };
 
+struct collection {
+	int amt, num;
+	collection operator+ (const collection& other) {
+		collection c;
+		c.amt = this->amt + other.amt;
+		c.num = this->num + other.num;
+		return c;
+	}
+	collection operator() (const collection& a, const collection& b) const {
+		return a.amt < b.amt;
+	}	
+};
+
 void solve(const testcase& t) {
-	map<int, int> amounts;
-	
+	vector<collection> amounts;
+
+	while(curr.first < t.p) {
+
+	}
 }
 
 int main() {
@@ -27,7 +42,7 @@ int main() {
 			cin >> temp;
 			tempcase.coins.push_back(temp);
 		}
-		sort(tempcase.coins.begin(), tempcase.coins.end(), greater<int>());
+		sort(tempcase.coins.begin(), tempcase.coins.end(), less<int>());
 		testcases.push_back(tempcase);
 	}
 
